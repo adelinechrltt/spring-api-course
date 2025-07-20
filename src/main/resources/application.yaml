@@ -3,7 +3,9 @@ spring:
     name: store
   datasource:
     url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
-    username: root
-    password: MyPassword!
+    username: adeline
+    password: 1234Adeline!*
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
