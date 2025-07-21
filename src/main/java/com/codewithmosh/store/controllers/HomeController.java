@@ -11,9 +11,4 @@ public class HomeController {
         model.addAttribute("name", "Adeline");
         return "index";
     }
-
-    @RequestMapping("/hello")
-    public String sayHello() {
-        return "index";
-    }
 }
