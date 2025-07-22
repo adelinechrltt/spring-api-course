@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.codewithmosh.store.entities.User;
 
+import java.util.Set;
+
 @RestController
 @AllArgsConstructor
 public class UserController {
@@ -24,8 +26,16 @@ public class UserController {
     @GetMapping("/users")
     public Iterable<UserDto> getAllUsers(
             // add query param
-            @RequestParam String sort
+            // required = false so that the request param is not mandatory when hitting the endpoint
+            // set defaultValue = "" (empty string) to avoid null ptr exception by calling .contains during validation
+            @RequestParam(required = false, defaultValue = "") String sort
             ) {
+
+        // validation
+        // if sort contains "name" or "email", then automatically sort by name
+        if (!Set.of("name", "email").contains(sort))
+            sort = "name";
+
         return userRepository.findAll(Sort.by(sort))
                 .stream()
                 .map(userMapper::toDto)
