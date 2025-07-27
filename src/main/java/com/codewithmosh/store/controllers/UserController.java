@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
@@ -27,7 +28,7 @@ public class UserController {
     // @RequestMapping("/users")
     ///  RequestMapping by default is also GET
 
-    @GetMapping("/users")
+    @GetMapping
     public Iterable<UserDto> getAllUsers(
             // add query param
             // required = false so that the request param is not mandatory when hitting the endpoint
@@ -46,7 +47,7 @@ public class UserController {
                 .toList();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id){
         var user = userRepository.findById(id).orElse(null);
         if(user == null) {
@@ -57,7 +58,7 @@ public class UserController {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<UserDto> createUser(
             @RequestBody RegisterUserRequest request,
             UriComponentsBuilder uriBuilder){
@@ -70,7 +71,7 @@ public class UserController {
         return ResponseEntity.created(uri).body(userDto);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(
             @PathVariable(name = "id") Long id,
             @RequestBody UpdateUserRequest request
@@ -87,7 +88,7 @@ public class UserController {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Long id){
         var user = userRepository.findById(id).orElse(null);
         if(user == null) {
@@ -98,7 +99,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/users/{id}/change-password")
+    @PostMapping("/{id}/change-password")
     public ResponseEntity<Void> changePassword(
             @PathVariable Long id,
             @RequestBody ChangePasswordRequest request
