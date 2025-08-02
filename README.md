@@ -1,9 +1,9 @@
-Code-along repository utilizing Spring Boot MVC & Apache MySQL, following Programming With Mosh's Spring API course on YouTube. Course is accessible through the following link link.
+Forked, code-along repository. Utilizes Spring Boot MVC & Apache MySQL. Coded following Programming With Mosh's Spring API course on YouTube. Course is accessible through the below link.
 
 https://www.youtube.com/watch?v=EWd3_I4X32g&t=6515s
 
 
-Original README.md as forked from the repository is as follows.
+Original README.md as forked from the starter repository is as follows.
 
 ---
 
